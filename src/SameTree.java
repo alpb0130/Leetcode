@@ -1,5 +1,6 @@
 /**
  * Created by alpb0130 on 9/30/15.
+ * Time complexity O(n)
  */
 public class SameTree {
     public boolean isSameTree(TreeNode p, TreeNode q) {

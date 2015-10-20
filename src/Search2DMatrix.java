@@ -1,6 +1,14 @@
 /**
  * Created by alpb0130 on 9/30/15.
+ *
+ * Same Tree
+ *
+ * Given two binary trees, write a function to check if they are equal or not.
+ * Two binary trees are considered equal if they are structurally identical and the nodes have the same value.
+ *
+ * time complexity O(log n)
  */
+
 public class Search2DMatrix {
     public boolean searchMatrix(int[][] matrix, int target) {
         int rowIndex = 0, columnIndex = 0;
