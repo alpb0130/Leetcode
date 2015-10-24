@@ -1,6 +1,16 @@
 /**
  * Created by alpb0130 on 9/30/15.
- * Time complexity: O(n^2)
+ * <p>
+ * Balanced Binary Tree
+ * <p>
+ * Given a binary tree, determine if it is height-balanced.
+ * For this problem, a height-balanced binary tree is defined as
+ * a binary tree in which the depth of the two subtrees of every
+ * node never differ by more than 1.
+ * <p>
+ * Time complexity: O(n^2) (Original method: recursive function and depth computation function)
+ *
+ * Time complexity: O(n) (combine depth computation with balance judgement)
  */
 
 public class BalancedBinaryTree {
