@@ -14,6 +14,7 @@ import java.util.*;
  * Time Complexity: O (n)
  * <p>
  * Level traverse is better.
+ * Time Complexity: O (log n)
  */
 
 public class MinimumDepthOfBinaryTree {
