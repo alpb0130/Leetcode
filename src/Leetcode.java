@@ -5,7 +5,9 @@ import java.util.List;
  */
 public class Leetcode {
     public static void main(String[] args) {
-        int[] A = {0, 0, 0};
-
+        int[] A = {1, 2, 3, 4};
+        Tree tree = new Tree();
+        tree.initialize(A);
+        System.out.println(BinaryTreePaths.binaryTreePaths1(tree.root));
     }
 }

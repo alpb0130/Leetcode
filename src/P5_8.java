@@ -25,26 +25,26 @@ public class P5_8 {
         return same;
     }
 
-    public static void main(String[] arg) {
-        Scanner in = new Scanner(System.in);
-        int[] a = new int[10];
-        int[] b = new int[10];
-        int i = 0;
-        while (in.hasNext()) {
-            if (i < a.length) {
-                a[i] = in.nextInt();
-                i++;
-            }
-        }
-        int j = 0;
-        while (in.hasNext()) {
-            if (j < b.length) {
-                b[j] = in.nextInt();
-                j++;
-            }
-        }
-        boolean same = sameElements(a, b);
-        System.out.println("result:" + same);
-    }
+//    public static void main(String[] arg) {
+//        Scanner in = new Scanner(System.in);
+//        int[] a = new int[10];
+//        int[] b = new int[10];
+//        int i = 0;
+//        while (in.hasNext()) {
+//            if (i < a.length) {
+//                a[i] = in.nextInt();
+//                i++;
+//            }
+//        }
+//        int j = 0;
+//        while (in.hasNext()) {
+//            if (j < b.length) {
+//                b[j] = in.nextInt();
+//                j++;
+//            }
+//        }
+//        boolean same = sameElements(a, b);
+//        System.out.println("result:" + same);
+//    }
 }
 
