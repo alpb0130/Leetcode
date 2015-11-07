@@ -5,9 +5,11 @@ import java.util.List;
  */
 public class Leetcode {
     public static void main(String[] args) {
-        int[] A = {1, 2, 3, 4};
-        Tree tree = new Tree();
-        tree.initialize(A);
-        System.out.println(BinaryTreePaths.binaryTreePaths1(tree.root));
+//        int[] A = {1, 2, 3, 4};
+//        Tree tree = new Tree();
+//        tree.initialize(A);
+//        System.out.println(BinaryTreePaths.binaryTreePaths1(tree.root));
+        BullsNCows ins = new BullsNCows();
+        System.out.println(ins.getHint("1234", "0111"));
     }
 }
