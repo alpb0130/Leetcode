@@ -14,8 +14,8 @@
  * You may assume that the array does not change.
  * There are many calls to sumRange function.
  * <p>
- * Time complexity: O (n)
- * Space complexity: O ()
+ * Time complexity: Construction: O (n)   Sum: O (1)
+ * Space complexity: O (n)
  */
 public class NumArray {
     int[] nums;
