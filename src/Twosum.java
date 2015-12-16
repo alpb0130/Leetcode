@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by alpb0130 on 10/2/15.
  * <p>
@@ -11,6 +14,7 @@
  * Output: index1=1, index2=2
  */
 public class Twosum {
+    // Brute force. Time complexity: O(n^2);
     public int[] twoSum(int[] nums, int target) {
         int[] index = {-1, -1};
         for (int i = 0; i < nums.length - 1; i++) {
@@ -24,5 +28,33 @@ public class Twosum {
         if (index[0] != -1)
             return index;
         return null;
+    }
+
+    // Better way, sort first and then use two pointers to find the pair, time complexity: O (n * logn)
+    public int[] twosum1(int[] nums, int target) {
+        int[] numsCopy = Arrays.copyOf(nums, nums.length);
+        Arrays.sort(nums);
+        int i = 0, j = nums.length - 1;
+        int target1 = 0, target2 = 0;
+        int index1 = 0, index2 = 0;
+        int[] index = new int[2];
+        while (true) {
+            if (i >= j) break;
+            if (nums[i] + nums[j] == target) {
+                target1 = nums[i];
+                target2 = nums[j];
+                break;
+            }
+            if (nums[i] + nums[j] < target) i++;
+            if (nums[i] + nums[j] > target) j--;
+        }
+        int l = 0;
+        for (int k = 0; k < nums.length; k++) {
+            if (numsCopy[k] == target1 || numsCopy[k] == target2) {
+                index[l] = k + 1;
+                l++;
+            }
+        }
+        return index;
     }
 }
