@@ -36,7 +36,6 @@ public class Twosum {
         Arrays.sort(nums);
         int i = 0, j = nums.length - 1;
         int target1 = 0, target2 = 0;
-        int index1 = 0, index2 = 0;
         int[] index = new int[2];
         while (true) {
             if (i >= j) break;

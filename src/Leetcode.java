@@ -5,9 +5,16 @@ import java.util.List;
  */
 public class Leetcode {
     public static void main(String[] args) {
-        int[] A = {1, 2, 3, -1, -1, 4, 5, 6};
-        Tree tree = new Tree();
-        tree.initialize(A);
-        System.out.println(BinaryTreePaths.binaryTreePaths1(tree.root));
+        //Tree tree = new Tree();
+        //tree.initialize(A);
+        //System.out.println(LCAofBT.lowestCommonAncestor(tree.root, new TreeNode(38), new TreeNode(39)).val);
+        String str = new String("fd fds    wf");
+        String[] strArray = str.split("\\s+");
+        System.out.println("length:" + strArray.length);
+        for (int i = 0; i < strArray.length; i++) {
+            System.out.println("content:" + strArray[i]);
+        }
+        System.out.println(str.trim());
+
     }
 }
