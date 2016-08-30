@@ -10,20 +10,20 @@ public class AddTwoNumbers {
         int carry = 0;
         int sum = 0;
         while (l1Digit != null || l2Digit != null) {
-            sum += (l1 != null) ? l1.val : 0;
-            sum += (l2 != null) ? l2.val : 0;
+            sum += (l1Digit != null) ? l1Digit.val : 0;
+            sum += (l2Digit != null) ? l2Digit.val : 0;
             sum += carry;
-            carry = sum % 10;
+            carry = sum / 10;
             if (result == null) {
-                result = new ListNode(sum / 10);
+                result = new ListNode(sum % 10);
                 sumDigit = result;
             } else {
-                sumDigit.next = new ListNode(sum / 10);
+                sumDigit.next = new ListNode(sum % 10);
                 sumDigit = sumDigit.next;
             }
             sum = 0;
-            l1Digit = (l1 != null) ? l1Digit.next : null;
-            l2Digit = (l2 != null) ? l2Digit.next : null;
+            l1Digit = (l1Digit != null) ? l1Digit.next : null;
+            l2Digit = (l2Digit != null) ? l2Digit.next : null;
         }
         if (carry == 1) {
             sumDigit.next = new ListNode(1);

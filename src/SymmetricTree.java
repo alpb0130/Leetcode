@@ -68,11 +68,11 @@ public class SymmetricTree {
                 if (node1.right != null && node2.left == null || (node1.right == null && node2.left != null)) {
                     return false;
                 }
-                if (node1.left != null) {
+                if (node1.left != null && node2.right != null) {
                     stack.push(node1.left);
                     stack.push(node2.right);
                 }
-                if (node1.right != null) {
+                if (node1.right != null && node2.left != null) {
                     stack.push(node1.right);
                     stack.push(node2.left);
                 }

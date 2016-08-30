@@ -21,6 +21,7 @@ import java.util.Map;
  * Space Complexity: O (1) (hashmap is of constant size)
  */
 public class ValidAnagram {
+    // Hashmap
     public boolean isAnagram(String s, String t) {
         if (s == null && t == null) return true;
         if (s.length() != t.length()) return false;
@@ -41,6 +42,25 @@ public class ValidAnagram {
         }
         for (Map.Entry<Character, Integer> entry : str.entrySet()) {
             if (entry.getValue() != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Array.
+    public boolean isAnagram1(String s, String t) {
+        int[] charsMap = new int['z' - 'a' + 1];
+        for (char c : s.toCharArray()) {
+            int pos = c - 'a';
+            charsMap[pos]++;
+        }
+        for (char c : t.toCharArray()) {
+            int pos = c - 'a';
+            charsMap[pos]--;
+        }
+        for (int count : charsMap) {
+            if (count != 0) {
                 return false;
             }
         }
