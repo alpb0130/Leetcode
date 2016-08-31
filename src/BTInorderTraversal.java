@@ -43,6 +43,7 @@ public class BTInorderTraversal {
         }
         return nodeList;
     }
+
     // Iterative style 2
     public List<Integer> inorderTraversal2(TreeNode root) {
         List<Integer> nodeList = new ArrayList<Integer>();
@@ -61,6 +62,25 @@ public class BTInorderTraversal {
         }
         return nodeList;
     }
+
+    // Iterative style 3
+    public List<Integer> inorderTraversal3(TreeNode root) {
+        List<Integer> list = new ArrayList<Integer>();
+        if (root == null) return list;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode node = root;
+        while (node != null || !stack.isEmpty()) {
+            while(node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            node = stack.pop();
+            list.add(node.val);
+            node = node.right;
+        }
+        return list;
+    }
+
     // Recursive style
     public List<Integer> inorderTraversal1(TreeNode root) {
         List<Integer> nodeList = new ArrayList<Integer>();
