@@ -36,6 +36,33 @@ public class ConstructBinaryTreeFromPreorderInorder {
         }
         return root;
     }
+
+    // Improve. Using hashmap to store the index.
+    // The time complexity to get the index subtree root is O(1)
+    // Master theorem: T(n) = a * T(n/b) + f(n)
+    // T(n) = n^(log_b^a) + f (compare to n^(log_b^a))
+    // Here, f(n) = 1. T(n) = n.
+    Map<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
+    public TreeNode buildTree1(int[] preorder, int[] inorder) {
+        if (preorder.length == 0 || inorder.length == 0) return null;
+        for (int i = 0; i < preorder.length; i++)
+            hashmap.put(inorder[i], i);
+        return buildHelper(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+    }
+
+    public TreeNode buildHelper(int[] preorder, int prestart, int preend, int[] inorder, int instart, int inend) {
+        TreeNode root = new TreeNode(preorder[prestart]);
+        if (prestart == preend) return root;
+        int rootIndex = hashmap.get(preorder[prestart]);
+        int leftLen = rootIndex - instart;
+        int rightLen = inend - rootIndex;
+        if (leftLen != 0)
+            root.left = buildHelper(preorder, prestart + 1, prestart + leftLen, inorder, instart, rootIndex - 1);
+        if (rightLen != 0)
+            root.right = buildHelper(preorder, prestart + leftLen + 1, preend, inorder, rootIndex + 1, inend);
+        return root;
+    }
+
     public class TreeNode {
         int val;
         TreeNode left;

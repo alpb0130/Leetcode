@@ -9,84 +9,62 @@ import java.util.*;
  * (ie, from left to right, then right to left for the next level and alternate between).
  * For example:
  * Given binary tree {3,9,20,#,#,15,7},
- *      3
- *     / \
- *    9  20
- *      /  \
- *    15   7
+ * 3
+ * / \
+ * 9  20
+ * /  \
+ * 15   7
  * return its zigzag level order traversal as:
  * [
  * [3],
  * [20,9],
  * [15,7]
  * ]
- *
+ * <p>
  * Time Complexity: O(n)
  * Space Complexity: O(2^h)
  */
 public class BinaryTreeZigzagLevelOrderTraversal {
-    // Iterative style
+    // Recursive style
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> lList = new ArrayList<List<Integer>>();
-        if (root == null) return lList;
-        Queue<TreeNode> levelQueue = new LinkedList<TreeNode>();
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        levelQueue.offer(root);
-        boolean isZigzag = false;
-        while (!levelQueue.isEmpty()) {
-            int size = levelQueue.size();
-            List<Integer> list = new ArrayList<Integer>();
-            while (size > 0) {
-                TreeNode node = levelQueue.poll();
-                if (!isZigzag) {
-                    list.add(node.val);
-                    if (node.left != null) levelQueue.offer(node.left);
-                    if (node.right != null) levelQueue.offer(node.right);
-                    size--;
-                } else {
-                    stack.push(node);
-                    if (node.left != null) levelQueue.offer(node.left);
-                    if (node.right != null) levelQueue.offer(node.right);
-                    size--;
-                }
-            }
-            if (isZigzag) {
-                while (!stack.isEmpty()) {
-                    list.add(stack.pop().val);
-                }
-            }
-            lList.add(list);
-            isZigzag = !isZigzag;
-        }
-        return lList;
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if (root == null) return res;
+        zigzagHelper(root, res, 0);
+        return res;
     }
-    // Less space
-    public List<List<Integer>> zigzagLevelOrder1(TreeNode root) {
-        List<List<Integer>> lList = new ArrayList<List<Integer>>();
-        if (root == null) return lList;
-        Queue<TreeNode> levelQueue = new LinkedList<TreeNode>();
-        levelQueue.offer(root);
-        boolean isZigzag = false;
-        while (!levelQueue.isEmpty()) {
-            int size = levelQueue.size();
-            List<Integer> list = new ArrayList<Integer>();
-            while (size > 0) {
-                TreeNode node = levelQueue.poll();
-                if (!isZigzag) {
-                    list.add(node.val);
-                    if (node.left != null) levelQueue.offer(node.left);
-                    if (node.right != null) levelQueue.offer(node.right);
-                    size--;
-                } else {
-                    list.add(0, node.val);
-                    if (node.left != null) levelQueue.offer(node.left);
-                    if (node.right != null) levelQueue.offer(node.right);
-                    size--;
-                }
-            }
-            lList.add(list);
-            isZigzag = !isZigzag;
+
+    public void zigzagHelper(TreeNode root, List<List<Integer>> res, int level) {
+        if (root == null) return;
+        if (level == res.size()) res.add(new ArrayList<Integer>());
+        if (level % 2 == 0) {
+            res.get(level).add(root.val);
+        } else {
+            res.get(level).add(0, root.val);
         }
-        return lList;
+        zigzagHelper(root.left, res, level + 1);
+        zigzagHelper(root.right, res, level + 1);
+    }
+
+    // Iterative style
+    public List<List<Integer>> zigzagLevelOrder1(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if (root == null) return res;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        boolean isZig = true;
+        while (!queue.isEmpty()) {
+            List<Integer> list = new ArrayList<Integer>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (isZig) list.add(node.val);
+                else list.add(0, node.val);
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+            res.add(list);
+            isZig = !isZig;
+        }
+        return res;
     }
 }

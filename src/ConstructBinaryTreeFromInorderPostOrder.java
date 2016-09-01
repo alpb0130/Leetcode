@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by alpb0130 on 1/3/16.
  * <p>
@@ -7,6 +10,9 @@
  * You may assume that duplicates do not exist in the tree.
  */
 public class ConstructBinaryTreeFromInorderPostOrder {
+    // Master theorem: T(n) = a * T(n/b) + f(n)
+    // T(n) = n^(log_b^a) + f (compare to n^(log_b^a))
+    // Here, f(n) = n. T(n) = nlogn.
     // Time complexity: Average - O(n * logn), Best - O(n): right skew, Worst - O(n^2): left skew
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         if (postorder.length == 0 || inorder.length == 0) return null;
@@ -31,5 +37,32 @@ public class ConstructBinaryTreeFromInorderPostOrder {
             root.right = right;
         }
         return root;
+    }
+
+    // Improve. Using hashmap to store the index.
+    // The time complexity to get the index subtree root is O(1)
+    // Master theorem: T(n) = a * T(n/b) + f(n)
+    // T(n) = n^(log_b^a) + f (compare to n^(log_b^a))
+    // Here, f(n) = 1. T(n) = n.
+    Map<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
+
+    public TreeNode buildTree1(int[] inorder, int[] postorder) {
+        if (inorder == null || postorder == null || inorder.length == 0 || postorder.length == 0) return null;
+        for (int i = 0; i < inorder.length; i++)
+            hashmap.put(inorder[i], i);
+        return buildHelper(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
+    }
+
+    public TreeNode buildHelper(int[] inorder, int instart, int inend, int[] postorder, int poststart, int postend) {
+        TreeNode node = new TreeNode(postorder[postend]);
+        if (poststart == postend) return node;
+        int rootIndex = hashmap.get(postorder[postend]);
+        int leftLen = rootIndex - instart;
+        int rightLen = inend - rootIndex;
+        if (leftLen != 0)
+            node.left = buildHelper(inorder, instart, rootIndex - 1, postorder, poststart, poststart + leftLen - 1);
+        if (rightLen != 0)
+            node.right = buildHelper(inorder, rootIndex + 1, inend, postorder, postend - rightLen, postend - 1);
+        return node;
     }
 }
