@@ -5,33 +5,28 @@
 import java.util.*;
 
 public class PathSum2 {
+    // Recursive style and back tracking
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        ArrayList<List<Integer>> pathList = new ArrayList<List<Integer>>();
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        getPathList(root, sum, pathList, list);
-        return pathList;
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        pathHelper(root, sum, res, new ArrayList<Integer>());
+        return res;
     }
 
-    public void getPathList(TreeNode root, int sum, ArrayList<List<Integer>> pathList, ArrayList<Integer> list) {
-        if (root == null) {
-            return;
-        }
-        if (root.val == sum && root.left == null && root.right == null) {
-            list.add(root.val);
-            pathList.add(new ArrayList<Integer>(list));
+    public void pathHelper(TreeNode root, int sum, List<List<Integer>> res, List<Integer> list) {
+        if (root == null) return;
+        // Add current node value to the list
+        list.add(root.val);
+        if (root.left == null && root.right == null && root.val == sum) {
+            res.add(new ArrayList(list));
             list.remove(list.size() - 1);
             return;
         }
-        if (root.left != null) {
-            list.add(root.val);
-            getPathList(root.left, sum - root.val, pathList, list);
-            list.remove(list.size() - 1);
-        }
-        if (root.right != null) {
-            list.add(root.val);
-            getPathList(root.right, sum - root.val, pathList, list);
-            list.remove(list.size() - 1);
-        }
+        pathHelper(root.left, sum - root.val, res, list);
+        pathHelper(root.right, sum - root.val, res, list);
+
+        // Remove current node from list
+        list.remove(list.size() - 1);
+
         return;
     }
 }

@@ -8,34 +8,13 @@
  * a binary tree in which the depth of the two subtrees of every
  * node never differ by more than 1.
  * <p>
- * Time complexity: O(n^2) (Original method: recursive function and depth computation function)
  *
  * Time complexity: O(n) (combine depth computation with balance judgement)
  */
 
 public class BalancedBinaryTree {
-    //    public boolean isBalanced(TreeNode root) {
-//        if (root == null) {
-//            return true;
-//        }
-//        return isSubtreeBalanced(root.left, root.right);
-//    }
-//
-//    public boolean isSubtreeBalanced(TreeNode leftChild, TreeNode rightChild) {
-//        if (leftChild == null && rightChild == null) {
-//            return true;
-//        }
-//        if (leftChild != null && rightChild == null) {
-//            return leftChild.left == null && leftChild.right == null;
-//        }
-//        if (leftChild == null && rightChild != null) {
-//            return rightChild.left == null && rightChild.right == null;
-//        }
-//        return isSubtreeBalanced(leftChild.left, leftChild.right)
-//                && isSubtreeBalanced(rightChild.left, rightChild.right)
-//                && (Math.abs(treeDepth(leftChild) - treeDepth(rightChild)) <= 1);
-//    }
-//
+    // Return subtree depth and use -1 to represent false
+    // Time complexity: O(n)
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
             return true;

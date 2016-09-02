@@ -37,6 +37,7 @@ public class ConvertSortedArrayToBST {
     }
 
     // Recursive style
+    // Time Complexity: O(n)
     public TreeNode sortedArrayToBST1(int[] nums) {
         if (nums.length == 0) return null;
         return buildBST(nums, 0, nums.length - 1);

@@ -13,12 +13,12 @@ import java.util.*;
  * <p>
  * Time Complexity: O (n)
  * <p>
- * Level traverse is better.
- * Time Complexity: O (log n)
  */
 
 public class MinimumDepthOfBinaryTree {
     // DFS
+    // 一定要注意叶节点的定义.这里的最短路径是叶节点到根的距离.
+    // 不能简单的用高度较小的子树计算结果.
     public int minDepth(TreeNode root) {
         if (root == null) {
             return 0;

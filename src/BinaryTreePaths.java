@@ -5,11 +5,11 @@
  * <p>
  * Given a binary tree, return all root-to-leaf paths.
  * For example, given the following binary tree:
- *      1
- *    /   \
- *   2     3
- *    \
- *    5
+ * 1
+ * /   \
+ * 2     3
+ * \
+ * 5
  * All root-to-leaf paths are:
  * ["1->2->5", "1->3"]
  * <p>
@@ -20,28 +20,28 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class BinaryTreePaths {
-    // Recursive style
+    // Recursive style (Pretty like PathSumII)
+    // Time complexity: O(n)
     public List<String> binaryTreePaths(TreeNode root) {
-        String str = new String();
-        return TreePaths(root, str);
+        List<String> res = new ArrayList<String>();
+        pathHelper(root, res, new String());
+        return res;
     }
 
-    public List<String> TreePaths(TreeNode root, String str) {
-        List<String> strList = new ArrayList<String>();
-        if (root == null) {
-            return strList;
-        }
+    public void pathHelper(TreeNode root, List<String> res, String str) {
+        if (root == null) return;
+        str += root.val;
+        // Add new String to list
         if (root.left == null && root.right == null) {
-            str += root.val;
-            strList.add(str);
-            return strList;
+            res.add(str);
+            return;
         }
-        str += root.val + new String("->");
-        strList = TreePaths(root.left, str);
-        List<String> strListRight = TreePaths(root.right, str);
-        for (int i = 0; i < strListRight.size(); i++)
-            strList.add(strListRight.get(i));
-        return strList;
+        // If not leaf, append "->"
+        str += "->";
+        if (root.left != null)
+            pathHelper(root.left, res, str);
+        if (root.right != null)
+            pathHelper(root.right, res, str);
     }
 
     // Iterative style
