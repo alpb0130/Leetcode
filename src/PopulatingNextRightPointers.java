@@ -40,7 +40,43 @@ import java.util.Queue;
  * }
  */
 public class PopulatingNextRightPointers {
-    // Iterative style
+    // Iterative style.
+    // Time complexity: O(n). Space complexity: O(1)
+    public void connect2(TreeLinkNode root) {
+        if (root == null) return;
+        TreeLinkNode node = root;
+        TreeLinkNode cur = null;
+        // Traverse the leftmost node
+        while (node.left != null) {
+            cur = node;
+            // Traverse node in the same level
+            while (cur != null) {
+                cur.left.next = cur.right;
+                cur.right.next = cur.next != null ? cur.next.left : null;
+                cur = cur.next;
+            }
+            node = node.left;
+        }
+    }
+
+    // Recursive style.
+    // Time complexity: O(n). Space complexity: O(1).
+    public void connect3(TreeLinkNode root) {
+        if (root == null) return;
+        TreeLinkNode node = root;
+        if (root.left != null) {
+            while (node != null) {
+                node.left.next = node.right;
+                node.right.next = node.next != null ? node.next.left : null;
+                node = node.next;
+            }
+        }
+        connect(root.left);
+    }
+
+    // Iterative style. BFS.
+    // Space complexity: O(n)
+    // Time complexity: O(n)
     public void connect(TreeLinkNode root) {
         if (root == null) {
             return;
@@ -66,7 +102,10 @@ public class PopulatingNextRightPointers {
             }
         }
     }
-    // Recursive style
+
+    // Recursive style. DFS.
+    // Time complexity: O(n^log_2^3)
+    // Space complexity: Not O(1)
     public void connect1(TreeLinkNode root) {
         if (root == null) {
             return;
@@ -74,10 +113,10 @@ public class PopulatingNextRightPointers {
         root.next = null;
         connectNode(root.left, root.right);
     }
-    public void connectNode (TreeLinkNode left, TreeLinkNode right) {
-        if (left == null && right == null) return;
+
+    public void connectNode(TreeLinkNode left, TreeLinkNode right) {
+        if (left == null || right == null) return;
         left.next = right;
-        right.next = null;
         connectNode(left.left, left.right);
         connectNode(left.right, right.left);
         connectNode(right.left, right.right);

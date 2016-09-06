@@ -20,6 +20,8 @@
  * Time Complexity: O(n)
  */
 public class LCAOfBST {
+    // Recursive style
+    // Time complexity: O(logn)
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) {
             return null;

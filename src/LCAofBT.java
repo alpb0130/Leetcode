@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class LCAofBT {
     // Recursive style
+    // Time complexity: O(logn)
     public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) return null;
         if (root == p || root == q) return root;

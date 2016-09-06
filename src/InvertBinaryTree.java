@@ -16,9 +16,9 @@
  *  / \   / \
  * 9   6 3   1
  *
- * Time Complexity: O (n)
  */
 public class InvertBinaryTree {
+    // Time Complexity: O (n)
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return root;

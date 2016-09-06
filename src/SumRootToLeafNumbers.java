@@ -20,46 +20,7 @@ import java.util.Stack;
  * Time Complexity: O(n)
  */
 public class SumRootToLeafNumbers {
-    // A stupid way......
-    public int sumNumbers(TreeNode root) {
-        int sum = 0;
-        ArrayList<ArrayList<Integer>> pathList = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        getPath(root, pathList, list);
-        System.out.print(pathList);
-        for (ArrayList<Integer> tempList : pathList)
-            sum += getNumber(tempList);
-        return sum;
-    }
-
-    public void getPath(TreeNode root, ArrayList<ArrayList<Integer>> pathList, ArrayList<Integer> list) {
-        if (root == null)
-            return;
-        list.add(root.val);
-        if (root.left == null && root.right == null) {
-            pathList.add(new ArrayList<Integer>(list));
-            return;
-        }
-        if (root.left != null) {
-            getPath(root.left, pathList, list);
-            list.remove(list.size() - 1);
-        }
-        if (root.right != null) {
-            getPath(root.right, pathList, list);
-            list.remove(list.size() - 1);
-        }
-        return;
-    }
-
-    public int getNumber(ArrayList<Integer> list) {
-        int sum = 0;
-        int l = list.size();
-        for (int i = 0; i < l; i++)
-            sum += list.get(i) * Math.pow(10, l - i - 1);
-        return sum;
-    }
-
-    // Recursive style
+    // Recursive style. Time complexity: O(n)
     public int sumNumbers1(TreeNode root) {
         return getSum(root, 0);
     }

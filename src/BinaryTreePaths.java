@@ -20,7 +20,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class BinaryTreePaths {
-    // Recursive style (Pretty like PathSumII)
+    // Recursive style with helper (Pretty like PathSumII)
     // Time complexity: O(n)
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<String>();
@@ -30,18 +30,27 @@ public class BinaryTreePaths {
 
     public void pathHelper(TreeNode root, List<String> res, String str) {
         if (root == null) return;
-        str += root.val;
-        // Add new String to list
+        if (root.left == null && root.right == null) res.add(str + root.val);
+        pathHelper(root.left, res, str + root.val + "->");
+        pathHelper(root.right, res, str + root.val + "->");
+    }
+
+    // Recursive style without helper function
+    public List<String> binaryTreePaths2(TreeNode root) {
+        List<String> paths = new LinkedList<>();
+        if (root == null) return paths;
         if (root.left == null && root.right == null) {
-            res.add(str);
-            return;
+            paths.add(root.val + "");
+            return paths;
         }
-        // If not leaf, append "->"
-        str += "->";
-        if (root.left != null)
-            pathHelper(root.left, res, str);
-        if (root.right != null)
-            pathHelper(root.right, res, str);
+        for (String path : binaryTreePaths(root.left)) {
+            paths.add(root.val + "->" + path);
+        }
+        for (String path : binaryTreePaths(root.right)) {
+            paths.add(root.val + "->" + path);
+        }
+
+        return paths;
     }
 
     // Iterative style

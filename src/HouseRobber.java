@@ -28,7 +28,7 @@ public class HouseRobber {
         return Math.max(dp[nums.length], dp[nums.length - 1]);
     }
 
-    // DP. Time complexity: O(n). Space complexity: O(n)
+    // DP. Time complexity: O(n). Space complexity: O(1)
     public int rob1(int[] nums) {
         if (nums.length == 0) return 0;
         if (nums.length == 1) return nums[0];
