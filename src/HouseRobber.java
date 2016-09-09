@@ -16,31 +16,28 @@
 public class HouseRobber {
     // DP. Time complexity: O(n). Space complexity: O(n)
     public int rob(int[] nums) {
-        if (nums.length == 0) return 0;
-        if (nums.length == 1) return nums[0];
-        int[] dp = new int[nums.length + 1];
-        dp[0] = 0;
+        if (nums == null || nums.length == 0) return 0;
+        int len = nums.length;
+        int dp[] = new int[len + 1];
         dp[1] = nums[0];
-        dp[2] = nums[1];
-        for (int i = 2; i < nums.length; i++) {
-            dp[i + 1] = Math.max(dp[i - 1], dp[i - 2]) + nums[i];
+        for (int i = 2; i < len + 1; i++) {
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i - 1]);
         }
-        return Math.max(dp[nums.length], dp[nums.length - 1]);
+        return dp[len];
     }
 
     // DP. Time complexity: O(n). Space complexity: O(1)
     public int rob1(int[] nums) {
-        if (nums.length == 0) return 0;
-        if (nums.length == 1) return nums[0];
-        int prev_prev = 0;
-        int prev = nums[0];
-        int now = nums[1];
-        for (int i = 2; i < nums.length; i++) {
-            int temp = now;
-            now = Math.max(prev, prev_prev) + nums[i];
-            prev_prev = prev;
-            prev = temp;
+        if (nums == null || nums.length == 0) return 0;
+        int len = nums.length;
+        int pre_pre = 0;
+        int pre = nums[0];
+        int cur = pre;
+        for (int i = 2; i < len + 1; i++) {
+            cur = Math.max(pre, pre_pre + nums[i - 1]);
+            pre_pre = pre;
+            pre = cur;
         }
-        return Math.max(now, prev);
+        return cur;
     }
 }

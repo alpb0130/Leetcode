@@ -15,24 +15,23 @@
  * The number of ways decoding "12" is 2.
  */
 public class DecodeWays {
-    // DP. Time complexity: O(n)
+    // DP. Time complexity: O(n). Space complexity: O(n).
     public int numDecodings(String s) {
         if (s == null || s.length() == 0) return 0;
-        int l = s.length();
-        int[] dp = new int[l + 1];
+        int[] dp = new int[s.length() + 1];
         dp[0] = 1;
-        if (s.charAt(0) != '0') dp[1] = 1;
-        for (int i = 2; i < l + 1; i++) {
-            if (s.substring(i - 2, i).equals("00")) return 0;
-            if (s.charAt(i - 2) != '0' && Integer.valueOf(s.substring(i - 2, i)) < 27) {
-                if (s.charAt(i - 1) != '0')
-                    dp[i] = dp[i - 1] + dp[i - 2];
-                else
-                    dp[i] = dp[i - 2];
-            } else if (s.charAt(i - 1) != '0') {
-                dp[i] = dp[i - 1];
+        for (int i = 1; i < s.length() + 1; i++) {
+            if (i == 1 && s.charAt(i - 1) != '0') {
+                dp[i] = 1;
+            } else if (i > 1) {
+                if (Integer.valueOf(s.substring(i - 1, i)) > 0) {
+                    dp[i] += dp[i - 1];
+                }
+                if (Integer.valueOf(s.substring(i - 2, i)) <= 26 && Integer.valueOf(s.substring(i - 2, i)) >= 10) {
+                    dp[i] += dp[i - 2];
+                }
             }
         }
-        return dp[l];
+        return dp[s.length()];
     }
 }

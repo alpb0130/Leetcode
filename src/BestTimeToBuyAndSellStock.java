@@ -15,6 +15,7 @@ public class BestTimeToBuyAndSellStock {
         int profit = 0;
         int min = prices[0];
         for (int i = 1; i < l; i++) {
+            // 这两句可以交换
             min = Math.min(min, prices[i]);
             profit = Math.max(profit, prices[i] - min);
         }
