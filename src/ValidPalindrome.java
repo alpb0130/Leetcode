@@ -12,7 +12,7 @@
  * For the purpose of this problem, we define empty string as valid palindrome.
  *
  * Time Complexity: O (n)
- * Space Complexity: O (0)
+ * Space Complexity: O (1)
  *
  */
 public class ValidPalindrome {
@@ -25,6 +25,19 @@ public class ValidPalindrome {
             while (i < s.length() && !Character.isLetter(s.charAt(i)) && !Character.isDigit(s.charAt(i))) i++;
             while (j > 0 && !Character.isLetter(s.charAt(j)) && !Character.isDigit(s.charAt(j)) ) j--;
             if (i < s.length() && j >= 0 && s.charAt(i) - s.charAt(j) != 0) return false;
+        }
+        return true;
+    }
+
+    public boolean isPalindrome1(String s) {
+        if (s == null || s.isEmpty()) return true;
+        int i = 0, j = s.length() - 1;
+        while (i < j) {
+            while (i < s.length() && !Character.isLetterOrDigit(s.charAt(i))) i++;
+            while (j >= 0 && !Character.isLetterOrDigit(s.charAt(j))) j--;
+            if (i < s.length() && j >= 0 && Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) return false;
+            i++;
+            j--;
         }
         return true;
     }

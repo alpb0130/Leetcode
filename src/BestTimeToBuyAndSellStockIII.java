@@ -12,8 +12,13 @@
  */
 public class BestTimeToBuyAndSellStockIII {
     // DP. Time complexity: O(n). Space complexity:O(n)
-    // Divide the process into two parts. Record the maximun profit of those two parts.
+    // Divide the process into two parts. Record the maximum profit of those two parts.
     // Find the best solution by traverse two array.
+    // The third loop seems to be wrong because it would allow two transactions in one day
+    // But it's actually good.
+    // Case 1: The actual solution is that buying and selling on the same day. But in fact,
+    // it can be regarded as one transaction.
+    // Case 2: The actual solution is that two transaction is not on the same day. That is good/
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length == 1) return 0;
         int l = prices.length;

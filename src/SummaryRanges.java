@@ -15,29 +15,21 @@ import java.util.List;
 public class SummaryRanges {
     public List<String> summaryRanges(int[] nums) {
         List<String> list = new ArrayList<String>();
-        if (nums.length == 0) return list;
-        StringBuffer str = new StringBuffer();
-        Integer start = nums[0], end = null;
+        if (nums == null || nums.length == 0) return list;
+        int start = 0, end = -1;
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] - nums[i - 1] != 1) {
-                if (end == null) {
-                    str.append(start.toString());
+                if (start + 1 == i) {
+                    list.add(Integer.toString(nums[start]));
                 } else {
-                    str.append(start.toString() + "->" + end.toString());
+                    list.add(String.format("%d->%d", nums[start], nums[end]));
                 }
-                list.add(str.toString());
-                str = new StringBuffer();
-                start = nums[i];
-                end = null;
-            } else
-                end = nums[i];
+                start = i;
+            }
+            end = i;
         }
-        if (end == null) {
-            str.append(start.toString());
-        } else {
-            str.append(start.toString() + "->" + end.toString());
-        }
-        list.add(str.toString());
+        if (start == nums.length - 1) list.add(Integer.toString(nums[start]));
+        else list.add(String.format("%d->%d", nums[start], nums[end]));
         return list;
     }
 

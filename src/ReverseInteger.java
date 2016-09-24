@@ -9,6 +9,7 @@
  */
 public class ReverseInteger {
     // Take care of overflow. Time complexity: O(n).
+    // Space: O(1)
     public int reverse(int x) {
         long y = 0;
         while (x != 0) {

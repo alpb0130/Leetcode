@@ -12,23 +12,9 @@
  * Because the new number is 100...000, consider the most significant number only.
  */
 public class PlusOne {
-    public int[] plusOne(int[] digits) {
-        if (digits.length == 0) return digits;
-        int carry = 1;
-        for (int i = digits.length - 1; i >= 0; i--) {
-            int d = digits[i] + carry;
-            digits[i] = d % 10;
-            carry = d / 10;
-            if (carry == 0) return digits;
-        }
-        if (carry == 1) {
-            int[] newDigits = new int[digits.length + 1];
-            newDigits[0] = carry;
-            return newDigits;
-        }
-        return digits;
-    }
     // Much clearer method
+    // Time: O(n)
+    // Space: O(1)
     public int[] plusOne1(int[] digits) {
         if (digits.length == 0) return digits;
         for (int i = digits.length - 1; i >= 0; i--) {
@@ -41,6 +27,23 @@ public class PlusOne {
         if (digits[0] == 0) {
             int[] newDigits = new int[digits.length + 1];
             newDigits[0] = 1;
+            return newDigits;
+        }
+        return digits;
+    }
+
+    public int[] plusOne(int[] digits) {
+        if (digits.length == 0) return digits;
+        int carry = 1;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            int d = digits[i] + carry;
+            digits[i] = d % 10;
+            carry = d / 10;
+            if (carry == 0) return digits;
+        }
+        if (carry == 1) {
+            int[] newDigits = new int[digits.length + 1];
+            newDigits[0] = carry;
             return newDigits;
         }
         return digits;

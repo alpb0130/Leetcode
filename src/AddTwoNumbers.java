@@ -1,85 +1,45 @@
 /**
  * Created by alpb0130 on 10/7/15.
+ * Modified by alpb0130 on 09/11/2016
+ * <p>
+ * 2. Add Two Numbers
+ * <p>
+ * You are given two linked lists representing two non-negative numbers.
+ * The digits are stored in reverse order and each of their nodes contain
+ * a single digit. Add the two numbers and return it as a linked list.
+ * <p>
+ * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+ * Output: 7 -> 0 -> 8
  */
 public class AddTwoNumbers {
+    // Dummy node.
+    // Time: O(n + m)
+    // Space: O(1)
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode l1Digit = l1;
-        ListNode l2Digit = l2;
-        ListNode result = null;
-        ListNode sumDigit = null;
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+        ListNode dummy = new ListNode(0);
+        ListNode ptr1 = l1;
+        ListNode ptr2 = l2;
+        ListNode ptr = dummy;
         int carry = 0;
         int sum = 0;
-        while (l1Digit != null || l2Digit != null) {
-            sum += (l1Digit != null) ? l1Digit.val : 0;
-            sum += (l2Digit != null) ? l2Digit.val : 0;
-            sum += carry;
-            carry = sum / 10;
-            if (result == null) {
-                result = new ListNode(sum % 10);
-                sumDigit = result;
-            } else {
-                sumDigit.next = new ListNode(sum % 10);
-                sumDigit = sumDigit.next;
-            }
+        while (ptr1 != null || ptr2 != null || carry != 0) {
             sum = 0;
-            l1Digit = (l1Digit != null) ? l1Digit.next : null;
-            l2Digit = (l2Digit != null) ? l2Digit.next : null;
+            sum += carry;
+            if (ptr1 != null) {
+                sum += ptr1.val;
+                ptr1 = ptr1.next;
+            }
+            if (ptr2 != null) {
+                sum += ptr2.val;
+                ptr2 = ptr2.next;
+            }
+            carry = sum / 10;
+            sum = sum % 10;
+            ptr.next = new ListNode(sum);
+            ptr = ptr.next;
         }
-        if (carry == 1) {
-            sumDigit.next = new ListNode(1);
-        }
-        return result;
-//        ListNode sumNode;
-//        if (l1 == null) {
-//            return l2;
-//        }
-//        if (l2 == null) {
-//            return l1;
-//        }
-//        ListNode l1Digit = l1;
-//        ListNode l2Digit = l2;
-//        int carry;
-//        int sum;
-//        sum = l1Digit.val + l2Digit.val;
-//        carry = sum / 10;
-//        sum = sum % 10;
-//        sumNode = new ListNode(sum);
-//        sumNode.next = null;
-//        ListNode sumDigit = sumNode;
-//        l1Digit = l1.next;
-//        l2Digit = l2.next;
-//        while (l1Digit != null && l2Digit != null) {
-//            sum = l1Digit.val + l2Digit.val + carry;
-//            carry = sum / 10;
-//            sum = sum % 10;
-//            sumDigit.next = new ListNode(sum);
-//            sumDigit.next.next = null;
-//            sumDigit = sumDigit.next;
-//            l1Digit = l1Digit.next;
-//            l2Digit = l2Digit.next;
-//        }
-//        while (l1Digit != null) {
-//            sum = l1Digit.val + carry;
-//            carry = sum / 10;
-//            sum = sum % 10;
-//            sumDigit.next = new ListNode(sum);
-//            sumDigit.next.next = null;
-//            sumDigit = sumDigit.next;
-//            l1Digit = l1Digit.next;
-//        }
-//        while (l2Digit != null) {
-//            sum = l2Digit.val + carry;
-//            carry = sum / 10;
-//            sum = sum % 10;
-//            sumDigit.next = new ListNode(sum);
-//            sumDigit.next.next = null;
-//            sumDigit = sumDigit.next;
-//            l2Digit = l2Digit.next;
-//        }
-//        if (carry == 1) {
-//            sumDigit.next = new ListNode(carry);
-//            sumDigit.next.next = null;
-//        }
-//        return sumNode;
+        return dummy.next;
     }
 }

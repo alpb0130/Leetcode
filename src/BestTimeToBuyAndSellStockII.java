@@ -26,6 +26,9 @@ public class BestTimeToBuyAndSellStockII {
     }
 
     // Equivalent method.
+    // Once you can get profit, make the transaction.
+    // You may be involve in two transactions in the same day.
+    // But the result is good.
     public int maxProfit1(int[] prices) {
         if (prices == null || prices.length <= 1) return 0;
         int profit = 0;

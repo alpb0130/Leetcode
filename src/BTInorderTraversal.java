@@ -63,6 +63,33 @@ public class BTInorderTraversal {
         return nodeList;
     }
 
+    // Morris Traversals
+    // Time: O(n)
+    // Space: O(1)
+    public List<Integer> inorderTraversal4(TreeNode root) {
+        List<Integer> list = new ArrayList<Integer>();
+        if (root == null) return list;
+        TreeNode node = root;
+        while(node != null) {
+            if (node.left != null) {
+                TreeNode succ = node.left;
+                while(succ.right != null && succ.right != node) succ = succ.right;
+                if (succ.right == null) {
+                    succ.right = node;
+                    node = node.left;
+                } else {
+                    succ.right = null;
+                    list.add(node.val);
+                    node = node.right;
+                }
+            } else {
+                list.add(node.val);
+                node = node.right;
+            }
+        }
+        return list;
+    }
+
     // Iterative style 3
     public List<Integer> inorderTraversal3(TreeNode root) {
         List<Integer> list = new ArrayList<Integer>();

@@ -27,7 +27,9 @@ public class PalindromeNumber {
         }
         return x == y;
     }
+
     // More efficient way. Check half of the number
+    // Time complexity: O(n). Space complexity: O(1)
     public boolean isPalindrome1(int x) {
         if (x < 0 || (x % 10 == 0 && x != 0)) return false;
         int y = 0;
